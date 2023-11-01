@@ -22,6 +22,49 @@ const createPizza = (req,res) =>
     }
 }
 
+const updatePizza = async (req, res) => {
+    const skuPizza = req.params.sku; // Assuming you pass the SKU in the URL parameters
+    const updateData = req.body;
+  
+    try {
+      const pizza = await AllPizza.findOne({ sku: skuPizza});
+  
+      if (!pizza) {
+        return res.status(404).json({ error: "Pizza no encontrada" });
+      }
+      if (updateData.nombre) pizza.nombre = updateData.nombre;
+      if (updateData.precio) pizza.precio = updateData.precio;
+      if (updateData.ingredientes) pizza.ingredientes = updateData.ingredientes;
+      if (updateData.sku) pizza.sku = updateData.sku;
+      if (updateData.tamaño) pizza.tamaño = updateData.tamaño;
+  
+      // Save the updated ingredient
+      const updatedPizza = await pizza.save();
+  
+      res.status(200).json(updatedPizza);
+    } catch (error) {
+      res.status(400).json({ error: error.message });
+    }
+  };
+
+  const deletePizza = async (req, res) => {
+    const skuPizza = req.params.sku; // Assuming you pass the SKU in the URL parameters
+  
+    try {
+      const pizza = await AllPizza.findOneAndDelete({ sku: skuPizza });
+  
+      if (!pizza) {
+        return res.status(404).json({ error: "Pizza no encontrada" });
+      }
+  
+      res.status(200).json({ message: "Pizza eliminada con éxito" });
+    } catch (error) {
+      res.status(400).json({ error: error.message });
+    }
+  };
+
 module.exports = {
     createPizza,
+    updatePizza,
+    deletePizza
   };

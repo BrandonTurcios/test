@@ -23,29 +23,47 @@ const createIngrediente = (req,res) =>
         res.send(error)
     }
 }
+
+
+
 const updateIngrediente = async (req, res) => {
-  const ingredientId = req.params.id;
-  const updateData = req.body; 
+  const skuIngrediente = req.params.sku; // Assuming you pass the SKU in the URL parameters
+  const updateData = req.body;
 
   try {
-    const ingredient = await Ingrediente.findById(ingredientId);
+    const ingrediente = await Ingrediente.findOne({ sku: skuIngrediente });
 
-    if (!ingredient) {
-      return res.status(404).json({ error: "Ingredient not found" });
+    if (!ingrediente) {
+      return res.status(404).json({ error: "Ingrediente no encontrado" });
+    }
+    if (updateData.sku) ingrediente.sku = updateData.sku;
+    if (updateData.nombre) ingrediente.nombre = updateData.nombre;
+    if (updateData.cantidad) ingrediente.cantidad = updateData.cantidad;
+    if (updateData.fecha_vencimiento) ingrediente.fecha_vencimiento = updateData.fecha_vencimiento;
+    if (updateData.fecha_compra) ingrediente.fecha_compra = updateData.fecha_compra;
+    if (updateData.precio) ingrediente.precio = updateData.precio;
+    if (updateData.marca) ingrediente.marca = updateData.marca;
+
+    // Save the updated ingredient
+    const updatedIngrediente = await ingrediente.save();
+
+    res.status(200).json(updatedIngrediente);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
+
+const deleteIngrediente = async (req, res) => {
+  const skuIngrediente = req.params.sku; // Assuming you pass the SKU in the URL parameters
+
+  try {
+    const ingrediente = await Ingrediente.findOneAndDelete({ sku: skuIngrediente });
+
+    if (!ingrediente) {
+      return res.status(404).json({ error: "Ingrediente no encontrado" });
     }
 
-
-    if (updateData.sku) ingredient.sku = updateData.sku;
-    if (updateData.nombre) ingredient.nombre = updateData.nombre;
-    if (updateData.cantidad) ingredient.cantidad = updateData.cantidad;
-    if (updateData.fecha_vencimiento) ingredient.fecha_vencimiento = updateData.fecha_vencimiento;
-    if (updateData.fecha_compra) ingredient.fecha_compra = updateData.fecha_compra;
-    if (updateData.precio) ingredient.precio = updateData.precio;
-    if (updateData.marca) ingredient.marca = updateData.marca;
-
-    const updatedIngredient = await ingredient.save();
-
-    res.status(200).json(updatedIngredient);
+    res.status(200).json({ message: "Ingrediente eliminado con éxito" });
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
@@ -53,6 +71,7 @@ const updateIngrediente = async (req, res) => {
 
 
 module.exports = {
-    createIngrediente,
-    updateIngrediente
+    createIngrediente, 
+    updateIngrediente,
+    deleteIngrediente
   };

@@ -1,7 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const createIngrediente=require("../Controllers/IngredienteController") ;
+const createdIngrediente=require("../Controllers/IngredienteController") ;
 
-router.post("/create",createIngrediente.createIngrediente);
-
+router.post("/create",createdIngrediente.createIngrediente);
+router.put("/:sku", createdIngrediente.updateIngrediente);
+router.delete("/delete/:sku", createdIngrediente.deleteIngrediente);
 module.exports = router;

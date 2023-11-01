@@ -1,7 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const createPizza =require("../Controllers/PizzaController") ;
+const createdPizza =require("../Controllers/PizzaController") ;
 
-router.post("/create",createPizza.createPizza);
-
+router.post("/create",createdPizza.createPizza);
+router.put("/:sku", createdPizza.updatePizza);
+router.delete("/delete/:sku", createdPizza.deletePizza);
 module.exports = router;
