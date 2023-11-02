@@ -69,9 +69,24 @@ const deleteIngrediente = async (req, res) => {
   }
 };
 
+const getAllIngredientes = async (req, res) => {
+  try {
+  
+    const ingredientes = await Ingrediente.find(); 
+
+    if (!ingredientes) {
+      return res.status(404).json({ error: 'No se ha encontrado ningun ingrediente' });
+    }
+
+    res.status(200).json(ingredientes);
+  } catch (error) {
+    res.status(500).json({ error: 'Internal server error' });
+  }
+};
 
 module.exports = {
     createIngrediente, 
     updateIngrediente,
-    deleteIngrediente
+    deleteIngrediente,
+    getAllIngredientes
   };

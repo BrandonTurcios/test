@@ -5,4 +5,5 @@ const createdMenu =require("../Controllers/MenuController") ;
 router.post("/create",createdMenu.createMenu);
 router.put("/:sku", createdMenu.updateMenu);
 router.delete("/delete/:sku", createdMenu.deleteMenu);
+router.get("/",createdMenu.getAllMenu);
 module.exports = router;

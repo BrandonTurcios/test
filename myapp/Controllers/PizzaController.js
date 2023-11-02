@@ -63,8 +63,24 @@ const updatePizza = async (req, res) => {
     }
   };
 
+  const getAllPizza = async (req, res) => {
+    try {
+    
+      const pizza = await AllPizza.find(); 
+  
+      if (!pizza) {
+        return res.status(404).json({ error: 'No se ha encontrado ninguna pizza' });
+      }
+  
+      res.status(200).json(pizza);
+    } catch (error) {
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  };
+
 module.exports = {
     createPizza,
     updatePizza,
-    deletePizza
+    deletePizza,
+    getAllPizza
   };

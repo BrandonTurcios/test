@@ -62,8 +62,24 @@ const updateMenu = async (req, res) => {
     }
   };
 
+  const getAllMenu = async (req, res) => {
+    try {
+    
+      const menu = await AllMenu.find(); 
+  
+      if (!menu) {
+        return res.status(404).json({ error: 'No se ha encontrado ningun menu' });
+      }
+  
+      res.status(200).json(menu);
+    } catch (error) {
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  };
+
 module.exports = {
     createMenu,
     updateMenu,
-    deleteMenu
+    deleteMenu,
+    getAllMenu
   };
