@@ -1,0 +1,53 @@
+
+.usernameInput
+{
+    font-size: 18px;
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border-color: turquoise;
+}
+
+.usernameInput:focus
+{
+    border-color: greenyellow;
+    outline: none;
+}
+.passwordInput
+{
+    font-size: 18px;
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border-color: turquoise;
+}
+.passwordInput:focus
+{
+    border-color: greenyellow;
+    outline: none;
+}
+.usernameLabel
+{
+    font-size: 18px;
+    color: green;
+}
+.passwordLabel{
+    font-size: 18px;
+    color: green;
+}
+
+body{
+    background: rgb(0,0,0);
+background: radial-gradient(circle, rgba(0,0,0,1) 0%, rgba(21,89,44,1) 35%, rgba(33,48,52,1) 95%, rgba(3,17,20,1) 100%);
+}
+
+h1{
+    color: rgb(47, 255, 82);
+    font-size: 100px;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 80px;
+    text-decoration:wavy;
+}

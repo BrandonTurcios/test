@@ -1,0 +1,22 @@
+
+.contenedor{
+    margin: 20px;
+  }
+  
+  .tabla{
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+  }
+  
+  .tabla th,
+  .tabla td {
+    border: 3px solid #fafafa;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .tabla th {
+    background-color: #f2f2f2;
+  }
+  
