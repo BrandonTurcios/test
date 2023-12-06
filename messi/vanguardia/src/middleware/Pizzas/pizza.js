@@ -1,21 +1,14 @@
-import axios, { all } from "axios";
+import axios from "axios";
 
-const getValuesPizza=async(req,res)=>
-{
-    let allValues="";
-    try
-    {
-        allValues =await axios.get("http://"+`${import.meta.env.VITE_APIURL}`)
-        console.log(allValues)
-        res.json({allValues})
+const getValuesPizza = async () => {
+  try {
+    const response = await axios.get(import.meta.env.VITE_URLAPI);
+    console.log(response.data); // Muestra los datos en la consola para verificar
+    return response.data; // Devuelve directamente los datos
+  } catch (error) {
+    console.error("Error al obtener datos:", error);
+    throw error; // Lanza el error para que el componente Pizzas pueda manejarlo
+  }
+};
 
-    }
-    catch(e){
-        console.log(res);
-       res.json({message:allValues.error})
-        
-    }
-   
-    
-}
 export default getValuesPizza;

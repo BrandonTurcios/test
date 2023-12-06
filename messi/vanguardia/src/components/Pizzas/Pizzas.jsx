@@ -1,22 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import './Pizzas.css';
 import getValuesPizza from '../../middleware/Pizzas/pizza';
+
 const Pizzas = () => {
   const [datos, setDatos] = useState([]);
 
   useEffect(() => {
-    const obtenerDatos = async () => 
-    {
+    const obtenerDatos = async () => {
       try {
-        const respuesta = await axios.get(); 
-        setDatos(respuesta.data);
+        const data = await getValuesPizza();
+        setDatos(data);
       } catch (error) {
         console.error('Error al obtener datos:', error);
       }
-
-      getValuesPizza();
-      setDatos(getValuesPizza().data)
     };
 
     obtenerDatos();
